@@ -25,24 +25,24 @@ public class TestNgExample {
 
     // pre-conditions --> to open the browser
     //                    to set implicit wait
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void setupBrowser(){
         WebDriverManager.chromedriver().setup();
-        driver=new ChromeDriver();
+        driver = new ChromeDriver();
         driver.get("http://hrm.syntaxtechs.net/humanresources/symfony/web/index.php/auth/login");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     // post condition --> to close the browser
-    @AfterMethod
+    @AfterMethod (alwaysRun = true)
     public void closeBrowser(){
         driver.quit();
     }
 
     // test case 1
     // verify login functionality
-    @Test
+    @Test (groups = "regression")
     public void loginFunctionality(){
         WebElement username =driver.findElement(By.xpath("//input[@name='txtUsername']"));
         username.sendKeys("Admin");
